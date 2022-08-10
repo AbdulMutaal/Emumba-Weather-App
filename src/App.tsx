@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { lazyLoad } from "./utils/loadable";
+import { routes } from "./router/routes";
 import './App.css';
+
+const WeatherPage = lazyLoad(() => import("./pages/weather/Weather"));
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+          <Routes>
+            <Route path={routes.weatherPage} element={<WeatherPage />} />
+          </Routes>
+      </Router>
     </div>
   );
 }
